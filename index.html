@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Johnathan Sweeney – Associate Producer | Creative Producer</title>
   <style>
-    :root{ --ink:#111; --muted:#666; --link:#0a66c2; --accent:#111; }
+    :root{
+      --ink:#111;
+      --muted:#666;
+      --link:#0a66c2;
+    }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;color:var(--ink);background:#fff;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
     main{max-width:920px;margin:40px auto;padding:0 24px}
@@ -21,13 +25,11 @@
     li{margin:6px 0}
     .split{display:grid;grid-template-columns:200px 1fr;gap:16px}
     .role{font-weight:600}
-    .org{color:var(--muted)}
-    .when{color:var(--muted);font-size:13px}
+    .org,.when{color:var(--muted);font-size:13px}
     .pill{display:inline-block;background:#f5f5f5;border-radius:8px;padding:2px 8px;margin:3px 6px 0 0;font-size:13px}
-    .skills .pill{margin-bottom:6px}
     .small{font-size:13px;color:var(--muted)}
     .nowrap{white-space:nowrap}
-    /* details dropdowns */
+    /* dropdowns */
     details{border:1px solid #eee;border-radius:10px;padding:10px 12px;background:#fafafa}
     details+details{margin-top:8px}
     summary{font-weight:600;cursor:pointer;list-style:none}
@@ -37,7 +39,7 @@
     .pillwrap{margin-top:8px}
     @media print{
       main{margin:10mm auto;padding:0 10mm}
-      a[href^="http"]:after{content:" (" attr(href) ")";color:var(--muted);font-size:12px}
+      a[href^="http"]:after{content:" (" attr(href) ")";color:#666;font-size:12px}
       .pill{background:#eee}
       details{border:none;padding:0;background:transparent}
       summary::after{display:none}
@@ -46,9 +48,11 @@
 </head>
 <body>
 <main>
+
+  <!-- Header -->
   <header>
     <h1>Johnathan Sweeney</h1>
-    <div class="subtitle">Vision‑driven builder and team organizer. Creative producer energy. Ready for anything.</div>
+    <div class="subtitle">Vision driven builder and team organizer. Creative producer energy. Ready for anything.</div>
     <div class="meta">
       <span>Tokyo, Japan</span>
       <span>•</span>
@@ -62,83 +66,98 @@
     </div>
   </header>
 
-  <section aria-label="Professional Summary">
-    <h2>Professional Summary</h2>
-    <p>Tokyo‑based production leader with 7+ years in game development environments pivoting from QA leadership into production and creative coordination. I align designers, engineers, and localization to hit milestones, turn feedback into sprint work, and protect schedules without killing creativity. Fluent in English and effective in bilingual teams; actively improving Japanese.</p>
+  <!-- Sony-first hook -->
+  <section id="sony-hook" style="margin:12px 0 18px">
+    <p style="font-size:16px;margin:0 0 8px">
+      PlayStation ready production lead. TRC submissions, cross discipline alignment, and launch day calm.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span class="tag">Shipped on PS5 and PS4</span>
+      <span class="tag">Sony TRC certification</span>
+      <span class="tag">WWS QA alumni</span>
+      <span class="tag">Live ops and day one patch</span>
+      <a href="#contact" class="tag" style="border-color:#0a66c2;color:#0a66c2;text-decoration:none">Contact me today</a>
+    </div>
   </section>
 
+  <!-- Summary -->
+  <section aria-label="Professional Summary">
+    <h2>Professional Summary</h2>
+    <p>
+      Tokyo based production leader pivoting from QA leadership into production and creative coordination. I translate creative goals into steady delivery for PlayStation titles. I run sprints, align design, engineering, and localization, and own submission checklists so builds pass Sony TRC on the first try. English native, JLPT N5.
+      <span lang="ja">日本語は学習中ですが、進捗・課題・スケジュールの共有は問題なく対応できます。</span>
+    </p>
+  </section>
+
+  <!-- Skills dropdown -->
   <section class="skills" aria-label="Core Skills and Tools">
     <details open>
       <summary>Core Skills and Tools</summary>
       <div class="pillwrap">
-        <span class="pill">Agile and Scrum (team ceremonies, planning, retros)</span>
+        <span class="pill">Agile and Scrum ceremonies</span>
         <span class="pill">Sprint planning</span>
         <span class="pill">Backlog grooming</span>
         <span class="pill">Milestone delivery</span>
         <span class="pill">Risk management</span>
-        <span class="pill">Cross‑functional coordination</span>
+        <span class="pill">Cross functional coordination</span>
         <span class="pill">Release scheduling</span>
-        <span class="pill">Live ops literacy (events, retention, KPIs)</span>
+        <span class="pill">Live ops literacy (events, KPIs)</span>
         <span class="pill">Jira</span>
         <span class="pill">Confluence</span>
         <span class="pill">TestRail</span>
-        <span class="pill">Perforce / Git basics</span>
-        <span class="pill">Unity / Unreal literacy</span>
-        <span class="pill">Excel & Google Sheets dashboards</span>
-        <span class="pill">Creative briefs & one‑pagers</span>
-        <span class="pill">Platform submissions (Sony TRC, Nintendo Lotcheck, Xbox XR)</span>
+        <span class="pill">Perforce and Git basics</span>
+        <span class="pill">Unity and Unreal literacy</span>
+        <span class="pill">Excel and Google Sheets dashboards</span>
+        <span class="pill">Creative briefs and one pagers</span>
+        <span class="pill">Platform submissions: Sony TRC, Nintendo Lotcheck, Xbox XR</span>
         <span class="pill">Maya 3D modeling</span>
         <span class="pill">Adobe Creative Cloud expert</span>
-        <span class="pill">Video editing</span>
-        <span class="pill">Motion graphics</span>
+        <span class="pill">Video editing and motion graphics</span>
         <span class="pill">Multimedia production</span>
         <span class="pill">Generative AI workflows</span>
-        <span class="pill">Prompt engineering</span>
-        <span class="pill">OpenAI • Gemini • Midjourney • Runway</span>
+        <span class="pill">Prompt engineering: OpenAI, Gemini, Midjourney, Runway</span>
         <span class="pill">Payroll administration for 100+ staff</span>
       </div>
     </details>
   </section>
 
+  <!-- Experience -->
   <section aria-label="Experience">
     <h2>Experience</h2>
 
-    <!-- TransPerfect -->
     <article class="split">
       <div>
-        <div class="role">QA Lead (Production‑facing)</div>
+        <div class="role">QA Lead (Production facing)</div>
         <div class="org">TransPerfect Japan, Tokyo</div>
         <div class="when">Aug 2024 to Present</div>
       </div>
       <div>
         <ul>
-          <li>Led an 8‑person core team: <strong>4 Senior Functional QA (FQA)</strong> and <strong>4 Localization QA (LQA)</strong> across Tokyo and Mexico; scaled to 20+ during peak builds. Owned staffing plans, schedules, and payroll for high‑load test events.</li>
-          <li>Up‑leveled triage and sprint rituals with producers and tech leads. Reached <strong>92% critical bug closure per sprint</strong> and cut reopen rate by <strong>40%</strong> quarter over quarter.</li>
-          <li>Built Jira/Sheets dashboards for scope, burndown, and defect velocity used in weekly leadership risk calls.</li>
-          <li>Coordinated first‑party submissions for <strong>PS5, Switch, Xbox, Steam</strong> with first‑pass approvals (Sony <em>TRC: Technical Requirements Checklist</em>, Nintendo <em>Lotcheck</em>, Xbox <em>XR</em>).</li>
-          <li>Improved new‑player experience by <strong>+60% first‑hour completion</strong> through UX fixes and onboarding copy improvements delivered with design.</li>
+          <li>Led an 8 person core team: <strong>4 Senior Functional QA (FQA)</strong> and <strong>4 Localization QA (LQA)</strong> across Tokyo and Mexico, scaled to 20+ during peak builds. Owned staffing plans, schedules, and payroll for high load test events.</li>
+          <li>Hit <strong>92% critical bug closure per sprint</strong> and reduced reopen rate by <strong>40%</strong> quarter over quarter by upgrading triage and producer rituals.</li>
+          <li>Built Jira and Sheets dashboards for scope, burndown, and defect velocity used in weekly leadership risk calls.</li>
+          <li>Coordinated first pass approvals for <strong>PS5, Switch, Xbox, and Steam</strong> submissions. Maintained Sony TRC readiness with zero critical fails at gate.</li>
+          <li>Improved first hour completion by <strong>60%</strong> through UX and copy fixes delivered with design before beta freeze.</li>
         </ul>
       </div>
     </article>
 
-    <!-- Lionbridge -->
     <article class="split">
       <div>
-        <div class="role">Lead QA (Cross‑site)</div>
-        <div class="org">Lionbridge, Tokyo & Remote</div>
+        <div class="role">Lead QA (Cross site)</div>
+        <div class="org">Lionbridge, Tokyo and Remote</div>
         <div class="when">Jan 2023 to Apr 2024</div>
       </div>
       <div>
         <ul>
-          <li>Directed international operations of <strong>100+ testers</strong> across the US, EU, and Japan. Built mentorship pipelines that produced multiple Senior Testers; organized ISTQB certification study groups and onboarding playbooks.</li>
-          <li>Localization leadership for major titles including <strong>Marvel’s Spider‑Man 2</strong> and 2K releases: coordinated LQA and vendor linguists across <strong>15+ languages</strong>, maintaining terminology consistency and on‑time text lock.</li>
-          <li>Primary point of contact to internal producers on <strong>Spider‑Man 2</strong>, <strong>Diablo IV</strong>, <strong>Modern Warfare II/III</strong>, aligning test cycles to roadmap milestones and partner deliverables.</li>
-          <li>Introduced a localization issue tracker that reduced text‑fix turnaround by <strong>~40%</strong> across languages; maintained <strong>98% on‑time</strong> delivery of reports and builds.</li>
+          <li>Directed international operations of <strong>100+ testers</strong> across the US, EU, and Japan. Built mentorship pipelines that produced multiple Senior Testers and supported ISTQB study groups.</li>
+          <li>Primary point of contact to internal producers on <strong>Spider Man 2</strong>, <strong>Diablo IV</strong>, and <strong>Modern Warfare II and III</strong>. Synced QA sprints to roadmap gates and partner deliverables.</li>
+          <li>Introduced a localization tracker that reduced text fix turnaround by about <strong>40%</strong> across 15+ languages.</li>
+          <li>Maintained <strong>98% on time</strong> delivery of reports and builds with clean handoffs across time zones.</li>
         </ul>
       </div>
     </article>
 
-    <!-- Sony San Diego Studio -->
     <article class="split">
       <div>
         <div class="role">Community Experience Specialist</div>
@@ -147,15 +166,14 @@
       </div>
       <div>
         <ul>
-          <li>Managed MLB The Show communities (in‑game chat, Twitch, Discord, forums). Enforced safety policies and executed actions against hate speech and harassment; reduced repeat‑offender incidents by <strong>47%</strong>.</li>
-          <li>Coordinated a <strong>Marvel’s Spider‑Man × MLB</strong> co‑marketing collaboration: approvals, assets, timelines, and stakeholder updates to hit launch dates without scope drift.</li>
-          <li>Resolved purchase entitlements and restored missing microtransaction rewards for <strong>tens of thousands</strong> of players by reconciling telemetry with support tickets. Authored SOPs that cut ticket handling time by <strong>38%</strong> and lifted CSAT to <strong>93%</strong>.</li>
-          <li>Tools & KPIs: Zendesk, internal developer tools, Jira, Confluence, Slack. Average first response under <strong>12 hours</strong>, escalation SLA <strong>96%</strong>.</li>
+          <li>Moderation leadership for MLB The Show across in game chat, Twitch, Discord, and forums. Reduced repeat offender incidents by <strong>47%</strong> by enforcing safety playbooks and fast escalations.</li>
+          <li>Coordinated <strong>Marvel’s Spider Man × MLB</strong> co marketing. Managed approvals, assets, and timelines with no scope drift.</li>
+          <li>Resolved purchase entitlements at scale. SOPs cut ticket handling time by <strong>38%</strong> and raised CSAT to <strong>93%</strong>. Average first response under <strong>12 hours</strong>, escalation SLA <strong>96%</strong>.</li>
+          <li>Tools: Zendesk, internal developer tools, Jira, Confluence, Slack.</li>
         </ul>
       </div>
     </article>
 
-    <!-- PlayStation WWS -->
     <article class="split">
       <div>
         <div class="role">Game Test Analyst</div>
@@ -164,128 +182,178 @@
       </div>
       <div>
         <ul>
-          <li>Supported flagship first‑party titles including <strong>God of War (2018)</strong>, <strong>Spider‑Man</strong>, <strong>Ghost of Tsushima</strong>, and <strong>The Last of Us Part II</strong>.</li>
-          <li>Authored <strong>1,000+ high‑quality defects</strong> on God of War (2018); recognized as a top performer for precision and ownership.</li>
-          <li>Partnered with developers and producers to define acceptance criteria and milestone gates used for sign‑off.</li>
-          <li>Coordinated with hardware, platform, and compliance teams to prepare submissions and release notes.</li>
+          <li>Supported flagship first party titles including <strong>God of War 2018</strong>, <strong>Spider Man</strong>, <strong>Ghost of Tsushima</strong>, and <strong>The Last of Us Part II</strong>.</li>
+          <li>Authored <strong>1,000+ high quality defects</strong> on God of War 2018 with clear repro and priority. Helped accelerate polish toward submission.</li>
+          <li>Partnered with developers and producers on acceptance criteria and milestone gates used for sign off.</li>
+          <li>Coordinated with hardware, platform, and compliance teams for release notes and submissions.</li>
         </ul>
       </div>
     </article>
 
+    <article class="split">
+      <div>
+        <div class="role">Editorial Director</div>
+        <div class="org">Doodad (Tech and Games News)</div>
+        <div class="when">Mar 2006 to Jun 2013</div>
+      </div>
+      <div>
+        <ul>
+          <li>Founded and ran a news site covering <strong>CES</strong>, <strong>E3</strong>, <strong>PAX</strong>, and <strong>Comic Con</strong>. Led editorial calendars, content production, and creator partnerships.</li>
+          <li>Built and managed contributor teams, negotiated media access, and delivered event operations under tight deadlines.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <!-- Projects dropdowns -->
   <section class="projects" aria-label="Selected Projects">
     <h2>Selected Projects</h2>
 
-    <details class="proj">
-      <summary>Call of Duty: Modern Warfare II & III — International QA Leadership</summary>
+    <details class="proj"><summary>God of War 2018</summary>
       <ul>
-        <li><em>Goal</em>: Execute multi‑region test cycles without slipping partner deliverables.</li>
-        <li><em>Actions</em>: Coordinated QA across US, EU, and Japan time zones; wrote handoff playbooks; centralized risk/status in Jira for producer reviews.</li>
-        <li><em>Result</em>: 24‑hour coverage, faster turnaround on critical issues, predictable milestone sign‑offs.</li>
+        <li>1,000+ actionable defects with clean repro and priority. Focus on combat feel, UI clarity, and streaming stability.</li>
+        <li>Supported certification checklists and release readiness with compliance teams.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>Throne and Liberty — Global MMO Readiness</summary>
+    <details class="proj"><summary>Marvel’s Spider Man and Spider Man 2</summary>
       <ul>
-        <li><em>Goal</em>: Hit each Launch with polished onboarding and stable gameplay, focused on class balance and retention</li>
-        <li><em>Actions</em>: Time‑zone management between Tokyo, EU, and North America; risk dashboards; LQA + compliance alignment.</li>
-        <li><em>Result</em>: All launches met on time, high‑impact issues resolved pre‑freeze, first‑pass submissions, significant rise in first‑hour completion.</li>
+        <li>Aligned Functional QA and Localization QA for story, UI, and VO across 15+ languages. Protected build stability during partner beats.</li>
+        <li>Maintained text lock and terminology consistency for co marketing and platform submissions.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>God of War (2018) — Senior QA</summary>
+    <details class="proj"><summary>Call of Duty Modern Warfare II and III</summary>
       <ul>
-        <li>Authored <strong>1,000+</strong> actionable defects with clear repro steps and prioritization, accelerating polish in late state development.</li>
-        <li>Supported platform certification and release readiness with compliance teams.</li>
+        <li>International collaboration across US, EU, and Japan with 24 hour handoffs. Predictable milestone sign offs.</li>
+        <li>Faster turnaround on high severity issues by centralizing risk and status in Jira for producer reviews.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>The Last of Us Part II — Accessibility Testing & FQA</summary>
+    <details class="proj"><summary>Throne and Liberty</summary>
       <ul>
-        <li>Collaborated with Naughty Dog’s accessibility team to validate features for universal play.</li>
-        <li>Transformed playtest feedback into dev‑ready tasks with measurable acceptance criteria.</li>
+        <li>Hit beta with polished onboarding and stable combat. First pass submissions on target platforms.</li>
+        <li>Improved first hour completion by 60% through UX and copy fixes delivered before freeze.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>Marvel’s Spider‑Man, Spider‑Man: Miles Morales & Spider-Man 2 — FQA & LQA</summary>
+    <details class="proj"><summary>The Last of Us Part II</summary>
       <ul>
-        <li>Run functional QA on over 1000 issues. Supported Localization QA for story text, UI, and VO across multiple languages for Spider-Man 2.</li>
-        <li>Aligned test cycles with roadmap gates to support marketing beats and partner content across multiple regions.</li>
+        <li>Accessibility validation with Naughty Dog team to support universal play.</li>
+        <li>Transformed playtest signals into dev ready tasks with measurable acceptance criteria.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>Ghost of Tsushima — Performance & Open‑World Stability</summary>
+    <details class="proj"><summary>Ghost of Tsushima</summary>
       <ul>
-        <li>Focused on performance and streaming defects during late‑stage polish.</li>
-        <li>Supported Multiplayer day‑one patch validation and release notes preparation.</li>
+        <li>Late stage performance and open world stability. Day one patch validation and notes handoff.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>MLB The Show — Community Operations</summary>
+    <details class="proj"><summary>Diablo IV</summary>
       <ul>
-        <li>Moderation leadership across Twitch, Discord, and forums; repeat‑offender incidents reduced by <strong>47%</strong>.</li>
-        <li>Restored purchase entitlements at scale; SOPs cut ticket handling time by <strong>38%</strong>, CSAT to <strong>93%</strong>.</li>
+        <li>Cross site LQA support and terminology consistency; synced QA cycles with marketing beats.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>Astro Bot VR — Immersive UX QA</summary>
+    <details class="proj"><summary>MLB The Show</summary>
       <ul>
-        <li>Validated motion, comfort, and tutorial usability in VR contexts; provided UX notes for first‑time users.</li>
+        <li>Community operations leadership. Repeat offender incidents down 47%. CSAT up to 93%.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>No Man’s Sky — Live Content Regression</summary>
+    <details class="proj"><summary>Astro Bot VR</summary>
       <ul>
-        <li>Regression across major ongoing content updates; coordinated hotfix test passes and patch notes.</li>
+        <li>Comfort and tutorial usability for first time VR players. Clear notes for UX fixes and onboarding flow.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>Detroit: Become Human — Narrative & Choice QA</summary>
+    <details class="proj"><summary>No Man’s Sky</summary>
       <ul>
-        <li>Scenario and branching logic verification; ensured consistency across localized text and VO.</li>
+        <li>Live update regression. Hotfix test passes and patch notes coordination.</li>
       </ul>
     </details>
 
-    <details class="proj">
-      <summary>Minecraft — Team Leadership (WWS QA)</summary>
+    <details class="proj"><summary>Detroit Become Human</summary>
       <ul>
-        <li>Promoted to team lead after just a few months; coordinated EU/US workflows and test case ownership.</li>
+        <li>Branching narrative and choice QA. Consistency across localized text and VO.</li>
       </ul>
     </details>
 
+    <details class="proj"><summary>Minecraft (WWS QA)</summary>
+      <ul>
+        <li>Promoted to team lead within months. Cross site workflows and case ownership.</li>
+      </ul>
+    </details>
   </section>
 
+  <!-- Education -->
   <section aria-label="Education">
     <h2>Education</h2>
-    <p><strong>San Diego State University</strong> — Bachelor of Arts, Graphic Design & Multimedia (Dean’s List). Built prototype “Demo Jumper”</p>
+    <p><strong>San Diego State University</strong> — Bachelor of Arts, Graphic Design and Multimedia (Dean’s List). Built a prototype game titled Demo Jumper focused on interdimensional traversal.</p>
   </section>
 
+  <!-- Accolades -->
   <section aria-label="Accolades">
     <h2>Accolades</h2>
     <ul>
-      <li>Test Lead on <strong>Throne & Liberty, Call of Duty: Modern Warfare II/III</strong>.</li>
-      <li>Top‑performing QA on <strong>The Last of Us Part II</strong> and <strong>God of War (2018)</strong>.</li>
+      <li>Test Lead on <strong>Call of Duty Modern Warfare II and III</strong>.</li>
+      <li>Top performing QA on <strong>The Last of Us Part II</strong> and <strong>God of War 2018</strong>.</li>
       <li>Team Lead on <strong>Minecraft</strong> at PlayStation WWS QA.</li>
-      <li>Dean’s List at SDSU for exceptional scholarship in multimedia.</li>
+      <li>Dean’s List at SDSU for scholarship in multimedia.</li>
     </ul>
   </section>
 
+  <!-- Plain English glossary -->
+  <section aria-label="Glossary">
+    <details>
+      <summary>Acronym glossary in plain English</summary>
+      <ul>
+        <li><strong>FQA</strong>: Functional QA. Gameplay and systems testing.</li>
+        <li><strong>LQA</strong>: Localization QA. Text, audio, and cultural checks for each language.</li>
+        <li><strong>TRC</strong>: Sony Technical Requirements Checklist. Must pass rules to ship on PlayStation.</li>
+        <li><strong>Lotcheck</strong>: Nintendo certification process.</li>
+        <li><strong>XR</strong>: Xbox Requirements. Microsoft certification rules.</li>
+        <li><strong>SLA</strong>: Service Level Agreement. Promise on response or resolve times.</li>
+        <li><strong>Sev A</strong>: Highest impact, must fix bug.</li>
+      </ul>
+    </details>
+  </section>
 
+  <!-- Sony keywords for ATS -->
+  <section aria-label="PlayStation Keywords">
+    <h2>PlayStation Keywords</h2>
+    <p class="small">
+      TRC certification • dev kit coordination • partner submissions • first pass approval • bug triage • producer sync •
+      milestone gates • acceptance criteria • risk log • day one patch • live ops • entitlement fixes • CSAT • localization QA • UI copy fixes •
+      Jira • Confluence • Perforce • Unity • Unreal
+    </p>
+  </section>
+
+  <!-- Languages -->
   <section aria-label="Languages">
     <h2>Languages</h2>
-    <p>English native. Japanese JLPT N5. <BR>日本語は学習中ですが、進捗・課題・スケジュールの共有は問題なく対応できます。</p>
+    <p>English native. Japanese JLPT N5.</p>
   </section>
-    </p>
 
+  <!-- Contact -->
+  <section id="contact" aria-label="Contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:johnathan.sweeney@icloud.com">johnathan.sweeney@icloud.com</a> • LinkedIn: <a href="https://www.linkedin.com/in/multjmedia">multjmedia</a></p>
+    <p><a href="javascript:window.print()" class="tag" style="border-color:#0a66c2;color:#0a66c2;text-decoration:none">Print or save PDF</a></p>
   </section>
+
+  <!-- Links -->
+  <section aria-label="Links">
+    <h2>Links</h2>
+    <p>
+      <a href="#">Portfolio or case study folder</a> •
+      <a href="#">Producer case study PDF</a> •
+      <a href="#">Creative brief PDF</a>
+    </p>
+    <p class="small">Single file HTML. ATS friendly. Print ready.</p>
+  </section>
+
 </main>
 </body>
 </html>
