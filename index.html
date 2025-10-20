@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,6 @@
       --bg:#ffffff;
       --pill:#f5f5f5;
       --line:#eaeaea;
-      --focus:#111;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
@@ -20,25 +19,26 @@
     .nowrap{white-space:nowrap}
 
     /* Ultra-minimal top nav */
-    .topnav{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:saturate(160%) blur(6px);
-      background:rgba(255,255,255,.8);
-      border-bottom:1px solid var(--line);
-    }
+    .topnav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(6px);background:rgba(255,255,255,.8);border-bottom:1px solid var(--line)}
     .topnav-inner{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
     .brand{font-weight:700;letter-spacing:.2px}
-    .switch{display:flex;gap:8px}
-    .btn{
-      border:1px solid var(--line);background:#fff;border-radius:999px;
-      padding:8px 12px;font-size:13px;cursor:pointer;color:var(--ink)
-    }
+    .switch{display:flex;gap:8px;align-items:center}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-size:13px;cursor:pointer;color:var(--ink)}
     .btn.primary{border-color:#111;background:#111;color:#fff}
     .btn:focus{outline:2px solid #0003;outline-offset:2px}
+    .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+    .seg button{border:none;background:#fff;padding:8px 12px;font-size:13px;cursor:pointer}
+    .seg button.active{background:#111;color:#fff}
 
     /* Views */
     .view{opacity:0;transform:translateY(6px);pointer-events:none;height:0;overflow:hidden;transition:opacity .25s ease, transform .25s ease}
     .view.active{opacity:1;transform:none;pointer-events:auto;height:auto;overflow:visible}
+
+    /* Language visibility */
+    .lang-en{display:block}
+    .lang-ja{display:none}
+    [data-lang="ja"] .lang-en{display:none}
+    [data-lang="ja"] .lang-ja{display:block}
 
     /* Letter layout */
     .letter-wrap{max-width:820px;margin:48px auto;padding:0 24px}
@@ -49,13 +49,13 @@
     .letter .cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
     .rule{height:1px;background:var(--line);margin:18px 0}
 
-    /* Resume layout (from your page, lightly modernized) */
+    /* Resume layout */
     main{max-width:920px;margin:40px auto;padding:0 24px}
     header{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
     h1{font-size:28px;letter-spacing:.2px;margin:0}
     .subtitle{font-size:16px;color:var(--muted)}
     .meta{display:flex;flex-wrap:wrap;gap:10px;color:var(--muted)}
-    .meta a{color:var(--link);text-decoration:none}
+    .meta a{color:var(--link)}
     .tag{padding:2px 8px;border:1px solid #e5e5e5;border-radius:999px;font-size:12px;color:#333}
     section{margin:24px 0}
     h2{font-size:15px;text-transform:uppercase;letter-spacing:.8px;color:#333;margin:0 0 10px}
@@ -77,11 +77,9 @@
     .pillwrap{margin-top:8px}
 
     /* Footer contact */
-    .footerbar{
-      max-width:920px;margin:32px auto;padding:0 24px 24px 24px;color:var(--muted);font-size:13px
-    }
+    .footerbar{max-width:920px;margin:32px auto;padding:0 24px 24px 24px;color:var(--muted);font-size:13px}
 
-    /* Print: show resume only */
+    /* Print: show resume only in selected language */
     @media print{
       .topnav, .view#view-letter{display:none !important}
       .view#view-resume{display:block !important;opacity:1 !important;transform:none !important;height:auto !important;overflow:visible !important}
@@ -100,8 +98,12 @@
     <div class="topnav-inner">
       <div class="brand">JS</div>
       <div class="switch" role="tablist" aria-label="Switch views">
-        <button id="nav-letter" class="btn primary" role="tab" aria-selected="true" aria-controls="view-letter">Cover Letter</button>
-        <button id="nav-resume" class="btn" role="tab" aria-selected="false" aria-controls="view-resume">Resume</button>
+        <button id="nav-letter" class="btn primary" role="tab" aria-selected="true" aria-controls="view-letter"><span class="lang-en">Cover Letter</span><span class="lang-ja">カバーレター</span></button>
+        <button id="nav-resume" class="btn" role="tab" aria-selected="false" aria-controls="view-resume"><span class="lang-en">Resume</span><span class="lang-ja">履歴書</span></button>
+      </div>
+      <div class="seg" aria-label="Language">
+        <button id="lang-en" class="active" aria-pressed="true">EN</button>
+        <button id="lang-ja" aria-pressed="false">日本語</button>
       </div>
     </div>
   </nav>
@@ -109,7 +111,9 @@
   <!-- Cover Letter View -->
   <section id="view-letter" class="view active" role="tabpanel" aria-labelledby="nav-letter">
     <div class="letter-wrap">
-      <article class="letter">
+
+      <!-- EN Letter -->
+      <article class="letter lang-en" lang="en">
         <h1>Dear Sony,</h1>
         <div class="rule"></div>
         <p>My name is Johnathan Sweeney. I sold almost everything I owned and moved to Tokyo for one purpose. To help make PlayStation.</p>
@@ -128,13 +132,36 @@
           <a class="btn" href="javascript:window.print()">Print or Save PDF</a>
         </div>
       </article>
+
+      <!-- JP Letter -->
+      <article class="letter lang-ja" lang="ja">
+        <h1>拝啓　ソニー関係各位</h1>
+        <div class="rule"></div>
+        <p>ジョナサン・スウィーニーと申します。プレイステーションづくりに携わるという一心で身の回りの多くを手放し、東京へ移住いたしました。</p>
+        <p>最良のゲームは、簡潔で、人に寄り添い、必然であるべきだと考えます。プレイヤーが「スタート」を押した瞬間、迷いなく動く。その当たり前を守ることが、私の基準です。</p>
+        <p>私の役割は、その体験を守り抜くことです。大きな構想を、誰もが追える計画へと整えます。デザイン・エンジニア・ローカライズ・コミュニティの橋渡しを行い、意思決定を一度で着地させます。時間が迫るほど場を落ち着かせ、プラットフォームの審査要件を確実に満たし、範囲・進捗・リスクを一目で把握できる可視化を徹底します。スケジュールを守りながら、作品の火は消しません。</p>
+        <p>品位は重要です。言葉は重要です。最初の六十分は作品のすべてを方向づけます。プレイヤーが前のめりになるか、離れてしまうかを分けるのは、細部の選択です。簡潔は巧妙に勝ち、集中は雑音に勝ち、出荷は「ほぼ出来た」に勝ちます。</p>
+        <p>私が東京を選んだのは、品質の物差しを与えてくれたブランドと、そのものづくりの最前線に身を置きたいからです。長い目の仕事を厭わず、基準をもう一段引き上げる覚悟でおります。</p>
+        <p>もし差し支えなければ、十五分ほどお時間を頂戴できますと幸いです。早期に責任を持って貢献できる具体的な領域をご提案いたします。</p>
+
+        <p class="sign">敬具</p>
+        <p class="sign">ジョナサン・スウィーニー</p>
+        <p class="meta">東京都 • <a href="mailto:johnathan.sweeney@icloud.com">johnathan.sweeney@icloud.com</a> • <a href="https://www.linkedin.com/in/multjmedia">linkedin.com/in/multjmedia</a> • <a href="https://tptrek.github.io/JSRESUME/">tptrek.github.io/JSRESUME/</a></p>
+
+        <div class="cta">
+          <button class="btn primary" onclick="showView('resume')" aria-controls="view-resume">履歴書を見る</button>
+          <a class="btn" href="javascript:window.print()">印刷・PDF保存</a>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <!-- Resume View -->
   <section id="view-resume" class="view" role="tabpanel" aria-labelledby="nav-resume">
-    <main>
-      <!-- Header -->
+
+    <!-- EN Resume -->
+    <main class="lang-en" lang="en">
       <header>
         <h1>Johnathan Sweeney</h1>
         <div class="subtitle">Vision driven builder and team organizer. Production coordinator. Ready for all.</div>
@@ -154,7 +181,6 @@
         </div>
       </header>
 
-      <!-- Sony-first hook -->
       <section id="sony-hook" style="margin:12px 0 18px">
         <p style="font-size:16px;margin:0 0 8px">
           PlayStation ready production lead. TRC submissions, cross discipline alignment, and launch day calm.
@@ -163,12 +189,11 @@
           <span class="tag">Shipped on PS5, PS4, PS3 and PS Vita</span>
           <span class="tag">Sony TRC certification</span>
           <span class="tag">WWS QA alumni</span>
-          <span class="tag">Ongoing content live ops and day one patch authentication</span>
+          <span class="tag">Live ops and day one patch</span>
           <a href="#contact" class="tag" style="border-color:#0a66c2;color:#0a66c2;text-decoration:none">Contact me today</a>
         </div>
       </section>
 
-      <!-- Summary -->
       <section aria-label="Professional Summary">
         <h2>Professional Summary</h2>
         <p>
@@ -177,18 +202,17 @@
         </p>
       </section>
 
-      <!-- Skills dropdown -->
       <section class="skills" aria-label="Core Skills and Tools">
         <details open>
           <summary>Core Skills and Tools</summary>
           <div class="pillwrap">
-            <span class="pill">Agile and Scrum Planning</span>
+            <span class="pill">Agile and Scrum planning</span>
             <span class="pill">Sprint planning</span>
             <span class="pill">Milestone delivery</span>
             <span class="pill">Risk management</span>
             <span class="pill">Cross functional coordination</span>
             <span class="pill">Release scheduling</span>
-            <span class="pill">Live ops literacy (events, KPIs)</span>
+            <span class="pill">Live ops literacy</span>
             <span class="pill">Jira</span>
             <span class="pill">Confluence</span>
             <span class="pill">TestRail</span>
@@ -200,7 +224,6 @@
             <span class="pill">Maya 3D modeling</span>
             <span class="pill">Adobe Creative Cloud expert</span>
             <span class="pill">Video editing and motion graphics</span>
-            <span class="pill">Multimedia production</span>
             <span class="pill">Generative AI workflows</span>
             <span class="pill">Prompt engineering: OpenAI, Gemini, Midjourney, Runway</span>
             <span class="pill">Payroll administration for 100+ staff</span>
@@ -208,7 +231,6 @@
         </details>
       </section>
 
-      <!-- Experience -->
       <section aria-label="Experience">
         <h2>Experience</h2>
 
@@ -220,11 +242,11 @@
           </div>
           <div>
             <ul>
-              <li>Led an 8 person core team: <strong>4 Senior Functional QA (FQA)</strong> and <strong>4 Localization QA (LQA)</strong> across Tokyo and Mexico, scaled to 20+ internationally during peak builds. Owned staffing plans, schedules, and payroll for high load test events.</li>
-              <li>Hit <strong>92% critical bug closure per sprint</strong> and reduced reopen rate by <strong>40%</strong> quarter over quarter by upgrading triage and producer rituals.</li>
+              <li>Led an 8 person core team — 4 Senior Functional QA (FQA) and 4 Localization QA (LQA) — across Tokyo and Mexico; scaled to 20+ internationally during peak builds. Owned staffing plans, schedules, and payroll for high load test events.</li>
+              <li>Hit <strong>92% critical bug closure per sprint</strong> and reduced reopen rate by <strong>40%</strong> quarter over quarter through stronger triage and producer rituals.</li>
               <li>Built Jira and Sheets dashboards for scope, burndown, and defect velocity used in weekly leadership risk calls.</li>
-              <li>Coordinated first pass approvals for <strong>PS5, Switch, Xbox, and Steam</strong> submissions. Maintained Sony TRC readiness with zero critical fails at gate.</li>
-              <li>Improved first hour completion by <strong>60%</strong> through UX and copy fixes delivered with design before beta freeze.</li>
+              <li>Coordinated first pass approvals for <strong>PS5, Switch, Xbox, and Steam</strong> submissions; maintained Sony TRC readiness with zero critical fails at gate.</li>
+              <li>Improved first hour completion by <strong>60%</strong> through UX and copy fixes with design before beta freeze.</li>
             </ul>
           </div>
         </article>
@@ -237,9 +259,9 @@
           </div>
           <div>
             <ul>
-              <li>Directed <strong>80+ testers</strong> multilingual testers on Call of Duty. Built mentorship pipelines that produced multiple Senior Testers and supported ISTQB study groups.</li>
-              <li>Primary point of contact to internal producers on <strong>Spider Man 2</strong>, <strong>Diablo IV</strong>, and <strong>Modern Warfare II and III</strong>. Synced QA sprints to roadmap gates and partner deliverables.</li>
-              <li>Introduced a functional tracker that reduced text fix turnaround by about <strong>40%</strong> across 15+ languages.</li>
+              <li>Directed <strong>80+ multilingual testers</strong> across US, EU, and Japan. Built mentorship pipelines that produced Senior Testers and supported ISTQB study groups.</li>
+              <li>Primary point of contact to internal producers for key AAA titles; synced QA sprints to roadmap gates and partner deliverables.</li>
+              <li>Introduced a localization tracker that reduced text fix turnaround by about <strong>40%</strong> across 15+ languages.</li>
               <li>Maintained <strong>98% on time</strong> delivery of reports and builds with clean handoffs across time zones.</li>
             </ul>
           </div>
@@ -253,9 +275,9 @@
           </div>
           <div>
             <ul>
-              <li>Moderation leadership for MLB The Show across in game chat, Twitch, Discord, and forums. Reduced repeat offender incidents by <strong>47%</strong> by enforcing safety playbooks and fast escalations.</li>
-              <li>Coordinated <strong>Marvel’s Spider Man × MLB</strong> co marketing. Managed approvals, assets, and timelines with no scope drift.</li>
-              <li>Resolved purchase entitlements at scale. SOPs cut ticket handling time by <strong>38%</strong> and raised CSAT to <strong>93%</strong>. Average first response under <strong>12 hours</strong>, escalation SLA <strong>96%</strong>.</li>
+              <li>Moderation leadership across in-game chat, Twitch, Discord, and forums; reduced repeat-offender incidents by <strong>47%</strong> through clear safety playbooks and fast escalations.</li>
+              <li>Coordinated co-marketing approvals and assets with zero scope drift across teams and partners.</li>
+              <li>Resolved purchase entitlements at scale; standard operating procedures reduced ticket handling time by <strong>38%</strong> and raised customer satisfaction to <strong>93%</strong>. Average first response under <strong>12 hours</strong>, escalations within target <strong>96%</strong>.</li>
               <li>Tools: Zendesk, internal developer tools, Jira, Confluence, Slack.</li>
             </ul>
           </div>
@@ -269,104 +291,100 @@
           </div>
           <div>
             <ul>
-              <li>Supported flagship first party titles including <strong>God of War 2018</strong>, <strong>Spider Man</strong>, <strong>Ghost of Tsushima</strong>, and <strong>The Last of Us Part II</strong>.</li>
-              <li>Authored <strong>1,000+ high quality defects</strong> on God of War 2018 with clear repro and priority. Helped accelerate polish toward submission.</li>
-              <li>Partnered with developers and producers on acceptance criteria and milestone gates used for sign off.</li>
-              <li>Coordinated with hardware, platform, and compliance teams for release notes and submissions.</li>
+              <li>Supported flagship first-party titles including God of War (2018), Spider-Man, Ghost of Tsushima, and The Last of Us Part II.</li>
+              <li>Authored <strong>1,000+ high-quality defects</strong> with clear repro and prioritization; accelerated polish and submission readiness.</li>
+              <li>Partnered with developers and producers on acceptance criteria and milestone gates used for sign-off.</li>
+              <li>Coordinated with hardware, platform, and compliance teams for submissions and release notes.</li>
             </ul>
           </div>
         </article>
       </section>
 
-      <!-- Projects -->
       <section class="projects" aria-label="Selected Projects">
         <h2>Selected Projects</h2>
 
-        <details class="proj"><summary>God of War 2018</summary>
+        <details class="proj"><summary>God of War (2018)</summary>
           <ul>
-            <li>1,000+ actionable defects with clean repro and priority. Focus on combat feel, UI clarity, and streaming stability.</li>
+            <li>1,000+ actionable defects with clean repro and priority; focus on combat feel, UI clarity, and streaming stability.</li>
             <li>Supported certification checklists and release readiness with compliance teams.</li>
           </ul>
         </details>
 
-        <details class="proj"><summary>Marvel’s Spider Man and Spider Man 2</summary>
+        <details class="proj"><summary>Marvel’s Spider-Man and Spider-Man 2</summary>
           <ul>
-            <li>Aligned Functional QA and Localization QA for story, UI, and VO across 15+ languages. Protected build stability during partner beats.</li>
-            <li>Maintained text lock and terminology consistency for co marketing and platform submissions.</li>
+            <li>Aligned Functional QA and Localization QA for story, UI, and VO across 15+ languages; protected build stability during partner beats.</li>
+            <li>Maintained text lock and terminology consistency for platform submissions.</li>
           </ul>
         </details>
 
-        <details class="proj"><summary>Call of Duty Modern Warfare II and III</summary>
+        <details class="proj"><summary>Call of Duty: Modern Warfare II and III</summary>
           <ul>
-            <li>International collaboration across US, EU, and Japan with 24 hour handoffs. Predictable milestone sign offs.</li>
-            <li>Faster turnaround on high severity issues by centralizing risk and status in Jira for producer reviews.</li>
+            <li>International collaboration across US, EU, and Japan with 24-hour handoffs and predictable milestone sign-offs.</li>
+            <li>Faster turnaround on high-severity issues via centralized risk and status visible to producers.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>Throne and Liberty</summary>
           <ul>
-            <li>Hit beta with polished onboarding and stable combat. First pass submissions on target platforms.</li>
-            <li>Improved first hour completion by 60% through UX and copy fixes delivered before freeze.</li>
+            <li>Beta achieved with polished onboarding and stable combat; first-pass submissions on target platforms.</li>
+            <li>First-hour completion up 60% through UX and copy fixes before freeze.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>The Last of Us Part II</summary>
           <ul>
-            <li>Accessibility validation with Naughty Dog team to support universal play.</li>
-            <li>Transformed playtest signals into dev ready tasks with measurable acceptance criteria.</li>
+            <li>Accessibility validation to support broad play; clear acceptance criteria for polish tasks.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>Ghost of Tsushima</summary>
           <ul>
-            <li>Late stage performance and open world stability. Day one patch validation and notes handoff.</li>
+            <li>Late-stage performance and open-world stability; day-one patch validation and notes handoff.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>Diablo IV</summary>
           <ul>
-            <li>Cross site LQA support and terminology consistency; synced QA cycles with marketing beats.</li>
+            <li>Cross-site LQA support and terminology consistency; QA cycles synced with beats.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>MLB The Show</summary>
           <ul>
-            <li>Community operations leadership. Repeat offender incidents down 47%.</li>
+            <li>Community operations leadership; faster resolutions and clear playbooks.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>Astro Bot VR</summary>
           <ul>
-            <li>Comfort and tutorial usability for first time VR players. Clear notes for UX fixes and onboarding flow.</li>
+            <li>Comfort and tutorial usability for first-time VR players; clear notes for UX fixes.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>No Man’s Sky</summary>
           <ul>
-            <li>Live ongoing update regression. Hotfix test passes and patch notes coordination.</li>
+            <li>Live-update regression; coordinated hotfix validation and patch notes.</li>
           </ul>
         </details>
 
-        <details class="proj"><summary>Detroit Become Human</summary>
+        <details class="proj"><summary>Detroit: Become Human</summary>
           <ul>
-            <li>Branching narratives and choice QA. Ensured consistency across localized text and VO.</li>
+            <li>Narrative and branching choice QA; localized text and VO consistency.</li>
           </ul>
         </details>
 
         <details class="proj"><summary>Minecraft (WWS QA)</summary>
           <ul>
-            <li>Promoted to team lead within months. Coordinated international workflows and testcase ownership.</li>
+            <li>Promoted to team lead within months; cross-site workflows and case ownership.</li>
           </ul>
         </details>
       </section>
 
-      <!-- Education -->
       <section aria-label="Education">
         <h2>Education</h2>
-        <p><strong>San Diego State University</strong> — Bachelor of Arts, Graphic Design and Multimedia (Dean’s List). Built a prototype game titled Demo Jumper.</p>
+        <p><strong>San Diego State University</strong> — B.A. Graphic Design & Multimedia (Dean’s List). Prototype game “Demo Jumper.”</p>
       </section>
 
-      <!-- Contact footer -->
       <div id="contact" class="footerbar">
         Contact: <a href="mailto:johnathan.sweeney@icloud.com">johnathan.sweeney@icloud.com</a> •
         <a href="https://www.linkedin.com/in/multjmedia">linkedin.com/in/multjmedia</a> •
@@ -374,6 +392,230 @@
         <button class="btn" onclick="showView('letter')" aria-controls="view-letter">Back to Cover Letter</button>
       </div>
     </main>
+
+    <!-- JP Resume -->
+    <main class="lang-ja" lang="ja">
+      <header>
+        <h1>ジョナサン・スウィーニー</h1>
+        <div class="subtitle">ビジョン主導のビルダー／チームオーガナイザー。プロダクション調整に強み。</div>
+        <div class="meta">
+          <span>東京都</span>
+          <span>•</span>
+          <a href="https://www.linkedin.com/in/multjmedia" class="nowrap">www.linkedin.com/in/multjmedia</a>
+          <span>•</span>
+          <a href="mailto:johnathan.sweeney@icloud.com" class="nowrap">johnathan.sweeney@icloud.com</a>
+          <span>•</span>
+          <span class="nowrap">+81 70 8562 3620</span>
+          <span class="tag">英語ネイティブ</span>
+          <span class="tag">JLPT N5</span>
+        </div>
+        <div class="cta" style="margin-top:8px">
+          <button class="btn" onclick="showView('letter')" aria-controls="view-letter">カバーレターへ戻る</button>
+        </div>
+      </header>
+
+      <section id="sony-hook-ja" style="margin:12px 0 18px">
+        <p style="font-size:16px;margin:0 0 8px">
+          PlayStation向けプロダクションリード。TRC提出、部門横断の調整、ローンチ当日の安定運用。
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span class="tag">PS5／PS4／PS3／PS Vita実績</span>
+          <span class="tag">Sony TRC準拠</span>
+          <span class="tag">WWS QA出身</span>
+          <span class="tag">ライブ運用・初日パッチ</span>
+          <a href="#contact" class="tag" style="border-color:#0a66c2;color:#0a66c2;text-decoration:none">ご連絡はこちら</a>
+        </div>
+      </section>
+
+      <section aria-label="Professional Summary">
+        <h2>サマリー</h2>
+        <p>
+          東京拠点のプロダクションリーダー。QAリーダーから転じ、制作・ローカライズ・エンジニアリングを束ねて安定したデリバリーを実現。スプリント運営、課題の優先度付け、提出物の品質担保を徹底し、Sony TRCの初回承認を狙う体制を構築します。英語ネイティブ、日英バイリンガル環境に適応。日本語は継続学習中です。
+        </p>
+      </section>
+
+      <section class="skills" aria-label="Core Skills and Tools">
+        <details open>
+          <summary>コアスキル／ツール</summary>
+          <div class="pillwrap">
+            <span class="pill">アジャイル・スクラム運用</span>
+            <span class="pill">スプリント計画</span>
+            <span class="pill">マイルストーン達成</span>
+            <span class="pill">リスクマネジメント</span>
+            <span class="pill">部門横断の調整</span>
+            <span class="pill">リリーススケジューリング</span>
+            <span class="pill">ライブ運用の知見</span>
+            <span class="pill">Jira</span>
+            <span class="pill">Confluence</span>
+            <span class="pill">TestRail</span>
+            <span class="pill">Perforce／Git基礎</span>
+            <span class="pill">Unity／Unreal基礎知識</span>
+            <span class="pill">Excel／Google Sheetsダッシュボード</span>
+            <span class="pill">クリエイティブブリーフ／1ページ企画</span>
+            <span class="pill">提出：Sony TRC／Nintendo Lotcheck／Xbox XR</span>
+            <span class="pill">Maya 3Dモデリング</span>
+            <span class="pill">Adobe Creative Cloud熟練</span>
+            <span class="pill">映像編集・モーショングラフィックス</span>
+            <span class="pill">生成AIワークフロー</span>
+            <span class="pill">プロンプト設計（OpenAI／Gemini／Midjourney／Runway）</span>
+            <span class="pill">100名超の給与・体制管理</span>
+          </div>
+        </details>
+      </section>
+
+      <section aria-label="Experience">
+        <h2>職務経歴</h2>
+
+        <article class="split">
+          <div>
+            <div class="role">QAリード（プロダクション連携）</div>
+            <div class="org">TransPerfect Japan（東京）</div>
+            <div class="when">2024年8月 〜 現在</div>
+          </div>
+          <div>
+            <ul>
+              <li>シニアFQA4名・LQA4名のコア8名体制を東京／メキシコで運用。ピーク時は20名超へ拡張。人員計画、スケジュール、給与を管理。</li>
+              <li>毎スプリント重要課題の<strong>92％</strong>を解決、再発率を<strong>40％</strong>削減。トリアージ運用と会議体を改善。</li>
+              <li>範囲・消化・不具合速度を可視化するJira／Sheetsダッシュボードを構築し、週次リスク会議で共有。</li>
+              <li><strong>PS5／Switch／Xbox／Steam</strong>提出を初回承認に導く体制を整備し、重大指摘による足止めを防止。</li>
+              <li>オンボーディングと文言調整により、最初の一時間の到達率を<strong>60％</strong>向上。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="split">
+          <div>
+            <div class="role">リードQA（拠点横断）</div>
+            <div class="org">Lionbridge（東京・リモート）</div>
+            <div class="when">2023年1月 〜 2024年4月</div>
+          </div>
+          <div>
+            <ul>
+              <li>米欧日を跨ぐ<strong>80名超</strong>の多言語テスト体制を統率。メンター制度と育成でシニア人材を輩出、ISTQB学習支援を実施。</li>
+              <li>社内プロデューサーの主要窓口として、ロードマップとQAスプリントを同期。外部パートナー納品とも整合。</li>
+              <li>ローカライズ課題の追跡を高度化し、修正リードタイムを<strong>約40％</strong>短縮（15言語以上）。</li>
+              <li>時差ハンドオフを標準化し、レポート・ビルドの<strong>98％</strong>を期日通りに納品。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="split">
+          <div>
+            <div class="role">コミュニティ運用スペシャリスト</div>
+            <div class="org">Sony San Diego Studio（MLB The Show／サンディエゴ）</div>
+            <div class="when">2021年1月 〜 2022年10月</div>
+          </div>
+          <div>
+            <ul>
+              <li>ゲーム内チャット／Twitch／Discord／公式フォーラムを統合管理。再犯事案を<strong>47％</strong>抑制。</li>
+              <li>共催施策の承認・アセット・期限管理を徹底し、スコープ逸脱を抑止。</li>
+              <li>購入特典未付与の復旧を標準化。運用手順により対応時間を<strong>38％</strong>短縮、顧客満足を<strong>93％</strong>へ向上。初動応答は<strong>12時間以内</strong>、エスカレーション目標達成率<strong>96％</strong>。</li>
+              <li>主要ツール：Zendesk、社内開発ツール、Jira、Confluence、Slack。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="split">
+          <div>
+            <div class="role">ゲームテストアナリスト</div>
+            <div class="org">PlayStation Worldwide Studios（WWS）QA（サンディエゴ）</div>
+            <div class="when">2017年6月 〜 2023年1月</div>
+          </div>
+          <div>
+            <ul>
+              <li>大型ファーストパーティ作品の品質検証を担当。</li>
+              <li><strong>1,000件超</strong>の高品質な不具合票を作成し、再現手順と優先度を明確化。仕上げの精度を高め、提出準備を促進。</li>
+              <li>開発・制作と協働し、受け入れ基準とマイルストーンゲートを定義。</li>
+              <li>ハードウェア／プラットフォーム／コンプライアンスとの連携で提出物とリリースノートを整備。</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="projects" aria-label="Selected Projects">
+        <h2>主要プロジェクト</h2>
+
+        <details class="proj"><summary>God of War（2018）</summary>
+          <ul>
+            <li>1,000件超の実行可能な課題を作成。戦闘の手触り・UIの明瞭性・ストリーミング安定性を重点改善。</li>
+            <li>認証チェックリスト・リリース準備をコンプライアンスと連携し推進。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Marvel’s Spider-Man／Spider-Man 2</summary>
+          <ul>
+            <li>機能検証とLQA（多言語）を統合し、テキスト・UI・音声の一貫性を担保。提出・施策タイミングに合わせて安定化。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Call of Duty: Modern Warfare II／III</summary>
+          <ul>
+            <li>米欧日24時間ハンドオフ体制でマイルストーンを安定着地。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Throne and Liberty</summary>
+          <ul>
+            <li>オンボーディングの磨き込みと戦闘安定化でβを達成。初回提出を実現。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>The Last of Us Part II</summary>
+          <ul>
+            <li>アクセシビリティ検証と受け入れ基準の明文化で磨き込みを支援。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Ghost of Tsushima</summary>
+          <ul>
+            <li>終盤のパフォーマンス／オープンワールド安定化。初日パッチ検証・ノート整備。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>MLB The Show</summary>
+          <ul>
+            <li>コミュニティ運用の標準化で迅速な支援と信頼回復を実現。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Astro Bot VR</summary>
+          <ul>
+            <li>VR特有の快適性とチュートリアル・UXの改善提案。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>No Man’s Sky</summary>
+          <ul>
+            <li>ライブアップデートの回帰検証、ホットフィックス検証・ノート連携。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Detroit: Become Human</summary>
+          <ul>
+            <li>分岐シナリオの整合性確認、テキスト・音声の一貫性担保。</li>
+          </ul>
+        </details>
+
+        <details class="proj"><summary>Minecraft（WWS QA）</summary>
+          <ul>
+            <li>数か月でチームリードへ昇格。拠点横断のテストケース運用を整備。</li>
+          </ul>
+        </details>
+      </section>
+
+      <section aria-label="Education">
+        <h2>学歴</h2>
+        <p><strong>San Diego State University</strong> — グラフィックデザイン／マルチメディア学士（優秀者一覧）。プロトタイプ「Demo Jumper」を制作。</p>
+      </section>
+
+      <div id="contact" class="footerbar">
+        連絡先：<a href="mailto:johnathan.sweeney@icloud.com">johnathan.sweeney@icloud.com</a> ・
+        <a href="https://www.linkedin.com/in/multjmedia">linkedin.com/in/multjmedia</a> ・
+        <a href="javascript:window.print()">印刷・PDF保存</a> ・
+        <button class="btn" onclick="showView('letter')" aria-controls="view-letter">カバーレターへ戻る</button>
+      </div>
+    </main>
+
   </section>
 
   <script>
@@ -387,21 +629,49 @@
         letter.classList.remove('active'); resume.classList.add('active');
         navLetter.classList.remove('primary'); navLetter.setAttribute('aria-selected','false');
         navResume.classList.add('primary'); navResume.setAttribute('aria-selected','true');
-        history.replaceState(null,'','#resume');
+        const hash = location.hash.includes('ja') ? '#resume/ja' : '#resume';
+        history.replaceState(null,'',hash);
       }else{
         resume.classList.remove('active'); letter.classList.add('active');
         navResume.classList.remove('primary'); navResume.setAttribute('aria-selected','false');
         navLetter.classList.add('primary'); navLetter.setAttribute('aria-selected','true');
-        history.replaceState(null,'','#letter');
+        const hash = location.hash.includes('ja') ? '#letter/ja' : '#letter';
+        history.replaceState(null,'',hash);
       }
     }
 
-    // Wire buttons
+    function setLang(lang){
+      document.documentElement.setAttribute('lang', lang === 'ja' ? 'ja' : 'en');
+      document.body.setAttribute('data-lang', lang === 'ja' ? 'ja' : 'en');
+      // Toggle segmented control
+      document.getElementById('lang-en').classList.toggle('active', lang==='en');
+      document.getElementById('lang-en').setAttribute('aria-pressed', lang==='en');
+      document.getElementById('lang-ja').classList.toggle('active', lang==='ja');
+      document.getElementById('lang-ja').setAttribute('aria-pressed', lang==='ja');
+      // Update hash without losing current view
+      const isResume = document.getElementById('view-resume').classList.contains('active');
+      const v = isResume ? 'resume' : 'letter';
+      history.replaceState(null,'', lang==='ja' ? `#${v}/ja` : `#${v}`);
+      // Persist
+      try{ localStorage.setItem('lang', lang); }catch(e){}
+    }
+
     document.getElementById('nav-letter').addEventListener('click',()=>showView('letter'));
     document.getElementById('nav-resume').addEventListener('click',()=>showView('resume'));
+    document.getElementById('lang-en').addEventListener('click',()=>setLang('en'));
+    document.getElementById('lang-ja').addEventListener('click',()=>setLang('ja'));
 
-    // Load correct view from hash
     (function init(){
+      // Restore language
+      let lang = 'en';
+      try{
+        const saved = localStorage.getItem('lang');
+        if(saved === 'ja' || saved === 'en'){ lang = saved; }
+      }catch(e){}
+      if(location.hash.toLowerCase().includes('/ja')) lang = 'ja';
+      setLang(lang);
+
+      // Restore view
       const hash = location.hash.toLowerCase();
       if(hash.includes('resume')) showView('resume');
       else showView('letter');
